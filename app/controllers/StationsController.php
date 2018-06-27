@@ -8,7 +8,7 @@ use Model\Technical;
 
 class StationsController extends Controller {
     
-    public function insert(){
+    /* public function insert(){
         
         ini_set('auto_detect_line_endings',TRUE);
         $handle = fopen('./stations.csv','r');
@@ -25,12 +25,12 @@ class StationsController extends Controller {
 
             
 
-            $adress = $data[2];
-            preg_match("/^(.*)(\d{5})(.*)$/", $adress, $elems);
+            $address = $data[2];
+            preg_match("/^(.*)(\d{5})(.*)$/", $address, $elems);
             
             $station->station_ref = $data[0];
             $station->name_station = $data[1];
-            $station->adress = ((isset($elems[1])) ? $elems[1] : null);
+            $station->address = ((isset($elems[1])) ? $elems[1] : null);
             $station->zip = ((isset($elems[2])) ? $elems[2] : null);
             $station->city = ((isset($elems[3])) ? $elems[3] : null);
             $station->latitude = $data[3];
@@ -65,67 +65,17 @@ class StationsController extends Controller {
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
+    } */
+
+    public function address($zip) 
+    {
+        $station = Stations::find([
+            //'id' => $id,
+            'zip' => $zip
+        ]); 
+
+        var_dump($station);
+
+        //$this->url->redirect('adress');
     }
 }
-// class stationsController extends Controller {
-//         /**
-//      * Add category
-//      *
-//      * @return void
-//      */
-//     public function add()
-//     {
-//         $category = new Category();
-
-//         $category->name = $_POST['name'];
-//         $category->save();
-
-//         $this->flashbag->set('alert', [
-//             'type' => 'success',
-//             'msg' => 'category added !'
-//         ]);
-
-//         $this->url->redirect('categories');
-
-//     }
-
-//     /**
-//      * Index method
-//      *
-//      * @param string $page
-//      * @return void
-//      */
-//     public function index($page = "1") 
-//     {
-//         $categories = Category::find();
-
-//         echo $this->twig->render('categories/index.html.twig', [
-//             'categories' => $categories
-//         ]);
-//     }
-
-        
-//     /**
-//      * Deleting category
-//      *
-//      * @param int $id
-//      * @return void
-//      */
-//     public function delete($id) 
-//     {
-//         $category = Category::findOne([
-//             'id' => $id
-//         ]);
-
-//         $category->delete();
-
-//         $this->flashbag->set('alert', [
-//             'type' => 'success',
-//             'msg' => 'Category deleted !'
-//         ]);
-
-//         $this->url->redirect('categories');
-//     }
-
-
-// }

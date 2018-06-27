@@ -13,7 +13,7 @@ class Stations extends \PicORM\Model
     protected static $_tableFields = array(
         'station_ref',
         'name_station',
-        'adress',
+        'address',
         'zip',
         'city',
         'latitude',
@@ -23,7 +23,7 @@ class Stations extends \PicORM\Model
     public $id;
     public $station_ref;
     public $name_station;
-    public $adress;
+    public $address;
     public $zip;
     public $city;
     public $latitude;
