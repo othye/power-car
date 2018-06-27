@@ -13,7 +13,7 @@ class StationsController extends Controller {
     public function insert(){
         
         ini_set('auto_detect_line_endings',TRUE);
-        $handle = fopen('./stations.csv','r');
+        $handle = fopen('./files/stations.csv','r');
         while ( ($data = fgetcsv($handle) ) !== FALSE ) {
         //process
             //print_r($data);
