@@ -7,9 +7,11 @@ use Model\Stations;
 use Model\Technical;
 
 class StationsController extends Controller {
+    
     public function index() {
         echo $this->twig->render('todos/index.html.twig');
     }
+
     public function insert(){
         
         ini_set('auto_detect_line_endings',TRUE);

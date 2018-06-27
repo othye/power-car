@@ -18,6 +18,7 @@
   "homepage": "https://gitlab.com/synyster0fa7x/micro-mvc#README",
   "dependencies": {
     "bootstrap": "^4.1.1",
+    "jquery": "^1.9.1",
     "node-sass-watcher": "^0.5.1"
   },
   "devDependencies": {
