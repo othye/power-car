@@ -18,8 +18,6 @@
 #   - /todo/add
 #   controller: Controllers\TodoController::add
 
-# - path:
-#     - /todos/(\d+)
-#     - /todos
-#     - 
-#   controller: Controllers\TodoController::index
+- path:
+  - 
+  controller: Controllers\StationsController::index

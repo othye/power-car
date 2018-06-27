@@ -1,0 +1,8 @@
+html {
+  font-family: 'ubuntu',sans-serif,serif; }
+
+#map {
+  width: 100%;
+  height: calc(100vh - 106px); }
+
+/*# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguY3NzIiwic291cmNlcyI6WyJpbmRleC5zY3NzIl0sInNvdXJjZXNDb250ZW50IjpbImh0bWx7XG4gICAgZm9udC1mYW1pbHk6ICd1YnVudHUnLHNhbnMtc2VyaWYsc2VyaWY7XG59XG4jbWFwIHtcbndpZHRoOiAxMDAlO1xuaGVpZ2h0OiBjYWxjKDEwMHZoIC0gMTA2cHgpO1xufVxuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLEFBQUEsSUFBSSxDQUFBO0VBQ0EsV0FBVyxFQUFFLHlCQUF5QixHQUN6Qzs7QUFDRCxBQUFBLElBQUksQ0FBQztFQUNMLEtBQUssRUFBRSxJQUFJO0VBQ1gsTUFBTSxFQUFFLG1CQUFtQixHQUMxQiJ9 */
