@@ -4,10 +4,10 @@
             <a href="{{ url('') }}" class="brand-logo">
                 <img height="100px"src="./assets/img/logoPowerCarr.png" alt="logodusite">
             </a>
-            <form method="get" id="form1" class="right">       
-                <input id="search" placeholder="CP/Ville" type="search">
+            <form method="get" action="{{ url('search') }}" name="formulaire" id="form1" class="right">       
+                <input id="search" name="search" placeholder="CP/Ville" type="search">
                 <label class="label-icon" for="search"></label>
-                <button class="btn" type="submit" name="action"><i class="material-icons right">send</i>
+                <button class="btn" value="Recherche" name="envoi" type="submit" ><i class="material-icons right">send</i>
                 </button>
             </form>
         </div>
