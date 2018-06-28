@@ -1,8 +1,17 @@
-<nav>
-    <div class="nav-wrapper">
-        <a class="navbar-brand" href="{{ url('') }}"><img height="60px" src="./assets/img/logoPowerCarr.png" alt="logodusite"></a>
-        <ul id="nav-mobile" class="right">
-            <a class="navbar-brand" href="{{ url('') }}">PowerCar</a>
-        </ul>
-    </div>
-</nav>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper">
+            <a href="{{ url('') }}" class="brand-logo">
+                <img height="100px"src="./assets/img/logoPowerCarr.png" alt="logodusite">
+            </a>
+            <form method="get" action="{{ url('search') }}" name="formulaire" id="form1" class="right">       
+                <input id="search" name="search" placeholder="CP/Ville" type="search">
+                <label class="label-icon" for="search"></label>
+                <button class="btn" value="Recherche" name="envoi" type="submit" ><i class="material-icons right">send</i>
+                </button>
+            </form>
+        </div>
+    </nav>
+</div>
+
+

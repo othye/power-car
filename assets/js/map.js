@@ -8,4 +8,3 @@ L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 L.control.locate().addTo(map);
-
