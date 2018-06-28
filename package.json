@@ -18,10 +18,11 @@
   "homepage": "https://gitlab.com/synyster0fa7x/micro-mvc#README",
   "dependencies": {
     "bootstrap": "^4.1.1",
+    "leaflet.locatecontrol": "^0.62.0",
     "node-sass-watcher": "^0.5.1"
   },
   "devDependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.0",
     "gulp-sass": "^4.0.1",
     "gulp-sourcemaps": "^2.6.4"
   }

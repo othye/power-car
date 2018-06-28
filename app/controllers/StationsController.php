@@ -7,7 +7,6 @@ use Model\Stations;
 use Model\Technical;
 
 class StationsController extends Controller {
-
     public function index() {
         echo $this->twig->render('stations/index.html.twig');
     }
