@@ -29,9 +29,9 @@ class Stations extends \PicORM\Model
     public $latitude;
     public $longitude;
 
-    // protected static function defineRelations()
-	// {
-	// 	self::addRelationOneToMany('id', Todo::class, 'category_id');
-	//}
+    protected static function defineRelations()
+	{
+		self::addRelationOneToMany('id', Todo::class, 'id_station');
+	}
 
 }

@@ -1,3 +1,48 @@
-.navbar {
-    margin-bottom: 20px;
+nav {
+    font-family: 'ubuntu',sans-serif,serif;
+    margin-top: -0px;
+    background-color: grey;
+}
+nav div a img{
+    margin-left: 200px;
+    margin-top: 2px;
+    padding: 3px;
+}
+nav ul a {
+    margin-right: 200px;
+    font-size: 2.5em;
+}
+@media screen and (max-width: 1000px) {
+
+    nav div a img{
+        margin-left: 100px;
+        margin-top: 2px;
+    }
+    nav ul a {
+        margin-right: 100px;
+        font-size: 3em;
+    }
+}
+@media screen and (max-width: 700px) {
+
+    nav div a img{
+        margin-left: 50px;
+        margin-top: 2px;
+    }
+    nav ul a {
+        margin-right: 50px;
+        font-size: 2em;
+    }
+}
+@media screen and (max-width: 601px) {
+
+    nav div a img{
+        margin-left: 50px;
+        margin-top: 2px;
+        height: 50px;
+    }
+    nav ul a {
+        margin-right: 50px;
+        font-size: 2em;
+    }
 }

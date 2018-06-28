@@ -7,11 +7,15 @@ use Model\Stations;
 use Model\Technical;
 
 class StationsController extends Controller {
-    
-    /* public function insert(){
+
+    public function index() {
+        echo $this->twig->render('stations/index.html.twig');
+    }
+
+    /*public function insert(){
         
         ini_set('auto_detect_line_endings',TRUE);
-        $handle = fopen('./stations.csv','r');
+        $handle = fopen('./files/stations.csv','r');
         while ( ($data = fgetcsv($handle) ) !== FALSE ) {
         //process
             //print_r($data);
@@ -75,7 +79,52 @@ class StationsController extends Controller {
         ]); 
 
         var_dump($station);
+    }
+    public function search()
+    {
 
-        //$this->url->redirect('adress');
+        if(isset($_GET['envoi']) && !empty($_GET['search']) ) 
+        {   
+            $stations = Stations::find();
+            $queryBuilder = $stations->getQueryHelper();
+            $queryBuilder->orWhere("zip", '=', '"'.$_GET['search'].'"');
+            $queryBuilder->orWhere("city", 'LIKE', '"%'.$_GET['search'].'%"');
+            $queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
+            $stations->setQueryHelper($queryBuilder);
+
+
+            $technical = Technical::find();
+            $queryBuilder = $technical->getQueryHelper();
+            $technical->setQueryHelper($queryBuilder);
+
+
+            foreach($stations as $station) {
+                echo '<pre>' , var_dump($station) , '</pre>';
+                
+            }
+            foreach($technical as $technicals) {
+                echo '<pre>' , var_dump($technicals) , '</pre>';
+                
+            }
+            die;
+            echo $this->twig->render('stations/index.html.twig',[  
+                'zip' -> $zip,
+                'city' -> $city,
+                'address' -> $address
+                
+
+            ]);
+        }else{
+            /* $this->flashbag->set('alert', [
+                'type' => 'warning',
+                'msg' => 'reseigner votre adresse'
+            ]); */die;
+        }
+
+       
+        
+        $this->url->redirect(''); 
+
+    //$this->url->redirect('adress');
     }
 }

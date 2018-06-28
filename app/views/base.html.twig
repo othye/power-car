@@ -2,30 +2,34 @@
 <html lang="en">
     <head>
         {% block metas %}
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <meta name="description" content="">
-            <meta name="author" content="">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="description" content="">
+        <meta name="author" content="">
         {% endblock %}
-        
+
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
+        <link href="https://fonts.googleapis.com/css?family=Ubuntu:300,300i,400,400i,500,500i,700,700i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext" rel="stylesheet">
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+        <link rel="stylesheet" href="{{ url('assets/css/main.css') }}">
         {% endblock %}
-        
+
         <title>{% block title %}Micro-MVC{% endblock %}</title>
     </head>
 
-  <body>
-    {% include "partials/navbar.html.twig" %}
-    
-    <div class="container">
-        {% include "partials/flashbag.html.twig" %}
-        
-        {% block content %}{% endblock %}
-    </div>
+    <body>
+        {% include "partials/navbar.html.twig" %}
 
-    {% block javascripts %}
+        <div class="container-fluid">
+            {% include "partials/flashbag.html.twig" %}
+
+            {% block content %}{% endblock %}
+        </div>
+        {% block javascripts %}
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
         <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-    {% endblock %}
-  </body>
+        <script src="./assets/js/map.js"></script>
+        {% endblock %}
+        {% include "partials/footer.html.twig" %}
+    </body>
 </html>
