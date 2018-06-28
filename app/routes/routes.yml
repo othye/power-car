@@ -1,14 +1,14 @@
 - path: 
-  - /categories
+  - /stations
   controller: Controllers\StationsController::insert
 
-# - path: 
-#   - /category/delete/(\d+)
-#   controller: Controllers\CategoryController::delete
+- path: 
+  - /stations/(\d+)
+  controller: Controllers\StationsController::address
 
-# - path: 
-#   - /category/add
-#   controller: Controllers\CategoryController::add
+- path: 
+  - /search
+  controller: Controllers\StationsController::search
 
 # - path: 
 #   - /todo/delete/(\d+)
