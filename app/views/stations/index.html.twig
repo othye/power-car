@@ -3,13 +3,6 @@
 {% block content %}
 <section>
     <article>
-        <form class="form" method="get" action="{{ url('search') }}" name="formulaire">
-            <div class="input">
-                <label for="zip"> Indiquez un CodePostal ou une Ville : </label>
-                <div> <input name="search" id="search" type="search" placeholder="Ex : 39100 ou DOLE"></div>
-            </div>
-            <input class="btn" value="Recherche" name="envoi" id="envoi" type="submit">
-        </form>
         <div id="map"></div>
     </article>
 </section>
