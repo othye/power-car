@@ -31,7 +31,7 @@ class Stations extends \PicORM\Model
 
     protected static function defineRelations()
 	{
-		self::addRelationOneToMany('id', Todo::class, 'id_station');
+		self::addRelationOneToMany('id', Technicals::class, 'id_station');
 	}
 
 }

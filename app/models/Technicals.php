@@ -2,7 +2,7 @@
 
 namespace Model;
 
-class Technical extends \PicORM\Model
+class Technicals extends \PicORM\Model
 {
     protected static $_tableName = 'technical_infos';
     protected static $_primaryKey = 'id';

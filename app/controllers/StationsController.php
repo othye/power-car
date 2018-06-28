@@ -4,7 +4,7 @@ namespace Controllers;
 
 use Core\Controllers\Controller;
 use Model\Stations;
-use Model\Technical;
+use Model\Technicals;
 
 class StationsController extends Controller {
     public function index() {
@@ -44,25 +44,25 @@ class StationsController extends Controller {
             $station->save();
 
 
-            $technical = Technical::findOne([
+            $technicals = Technicals::findOne([
                 'id_station' => $station->id
             ]);
 
-            if(!$technical){
-                $technical = new Technical();
+            if(!$technicals){
+                $technicals = new Technicals();
             }
             
             
 
-            $technical->company = $data[5];
-            $technical->charge_type = $data[6];
-            $technical->nbr_pdc = $data[7];
-            $technical->connectors_type = $data[8];
-            $technical->more_infos = $data[9];
-            $technical->sources = $data[10];
-            $technical->id_station = $station->id;
+            $technicals->company = $data[5];
+            $technicals->charge_type = $data[6];
+            $technicals->nbr_pdc = $data[7];
+            $technicals->connectors_type = $data[8];
+            $technicals->more_infos = $data[9];
+            $technicals->sources = $data[10];
+            $technicals->id_station = $station->id;
 
-            $technical->save();
+            $technicals->save();
 
             //var_dump($data);die;
         }echo 'finished';
@@ -91,38 +91,24 @@ class StationsController extends Controller {
             $queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
             $stations->setQueryHelper($queryBuilder);
 
+            $array = [];
 
-            $technical = Technical::find();
-            $queryBuilder = $technical->getQueryHelper();
-            $technical->setQueryHelper($queryBuilder);
+            foreach($stations as $key => $station) {
+                $array[$key] = $station;
+                $array[$key]->technicals = [];
 
-
-            foreach($stations as $station) {
-                echo '<pre>' , var_dump($station) , '</pre>';
-                
+                foreach($station->getTechnicals() as $technical) {
+                    $array[$key]->technicals[] = $technical;
+                }
             }
-            foreach($technical as $technicals) {
-                echo '<pre>' , var_dump($technicals) , '</pre>';
-                
-            }
-            die;
+
+            //echo '<pre>'; var_dump($technical->company); die();
+            
             echo $this->twig->render('stations/index.html.twig',[  
-                'zip' -> $zip,
-                'city' -> $city,
-                'address' -> $address
-                
-
+                'stations' => $array
             ]);
-        }else{
-            /* $this->flashbag->set('alert', [
-                'type' => 'warning',
-                'msg' => 'reseigner votre adresse'
-            ]); */die;
         }
 
-       
-        
-        $this->url->redirect(''); 
 
     //$this->url->redirect('adress');
     }

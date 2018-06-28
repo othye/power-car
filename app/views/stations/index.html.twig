@@ -14,3 +14,12 @@
     </article>
 </section>
 {% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        var search = "{{ stations|json_encode() }}"
+        
+    </script>
+{% endblock %}
