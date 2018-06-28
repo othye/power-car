@@ -3,48 +3,5 @@ html{
 }
 #map {
     width: 100%;
-    height: calc(100vh - 106px);
-}
-form{
-    z-index: 10;
-    border: solid 1px transparent;
-    background-color: grey;
-    position:absolute;
-    opacity: 0.9;
-    width: 50%;
-    margin-left: 25%;
-    margin-top: 20%;
-    text-align: center;
-    padding: 1%;
-    border-radius: 25px;
-}
-label {
-    font-size: 1em;
-    color: black;
-}
-@media screen and (max-width: 900px){
-    form{
-        margin-top: 30%;
-    }    
-}
-@media screen and (max-width: 500px){
-    form{
-        margin-top: 60%;
-        width: 80%;
-        margin-left: 10%;
-    }    
-}
-.btn{
-    background-color: lightgray;
-    font-family: 'Ubuntu',sans-serif,serif;
-    font-weight: 700;
-    color: black;
-}
-.btn:hover{
-    background-color: grey;
-    color: white;
-}
-input[type=text]:not(.browser-default):focus:not([readonly]){
-    border-bottom: 1px solid white;
-    box-shadow: 0 1px 0 0 grey;
+    height: calc(100vh - 142px);
 }
