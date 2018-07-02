@@ -11,8 +11,18 @@
 
 {% block javascripts %}
     {{ parent() }}
-    
     <script>
+
+        var allStations = {{ allStations|json_encode()|raw }};
+        console.log(allStations);
+        
+        $.each(allStations, function(key3, allStations) {
+            var all = [allStations.latitude, allStations.longitude];
+                    console.log(all);
+            L.marker(all).addTo(map)
+        });
+
+
 
         var search = {{ stations|json_encode()|raw }};
         var bounds = [];

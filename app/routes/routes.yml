@@ -1,5 +1,5 @@
 - path: 
-  - /stations
+  - /stations/import
   controller: Controllers\StationsController::insert
 
 - path: 
@@ -10,13 +10,9 @@
   - /search
   controller: Controllers\StationsController::search
 
-# - path: 
-#   - /todo/delete/(\d+)
-#   controller: Controllers\TodoController::delete
-
-# - path: 
-#   - /todo/add
-#   controller: Controllers\TodoController::add
+- path: 
+  - /allStations
+  controller: Controllers\StationsController::allStations
 
 - path:
   - 

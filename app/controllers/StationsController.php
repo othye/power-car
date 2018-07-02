@@ -11,7 +11,7 @@ class StationsController extends Controller {
         echo $this->twig->render('stations/index.html.twig');
     }
 
-    /*public function insert(){
+    public function insert(){
         
         ini_set('auto_detect_line_endings',TRUE);
         $handle = fopen('./files/stations.csv','r');
@@ -68,29 +68,32 @@ class StationsController extends Controller {
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
-    } */
+    }
 
-    /*public function address($zip) 
+    public function allStations() 
     {
-        $station = Stations::find([
-            //'id' => $id,
-            'zip' => $zip
-        ]); 
+        $allStations = Stations::find();
+        $stationsArray = [];
+        foreach($allStations as $key => $allStation) {
+            $stationsArray[$key] = $allStation;
+        }
+        //echo '<pre>'; var_dump($stationsArray); die();
+        
+       echo $this->twig->render('stations/index.html.twig',[  
+            'allStations' => $stationsArray 
+        ]);
+    }
 
-        var_dump($station);
-    }*/
 
-    
     public function search()
     {
-
         if(isset($_GET['envoi']) && !empty($_GET['search']) ) 
         {   
             $stations = Stations::find();
             $queryBuilder = $stations->getQueryHelper();
             $queryBuilder->orWhere("zip", '=', '"'.$_GET['search'].'"');
             $queryBuilder->orWhere("city", 'LIKE', '"%'.$_GET['search'].'%"');
-            $queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
+            //$queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
             $stations->setQueryHelper($queryBuilder);
 
             $array = [];
@@ -111,6 +114,7 @@ class StationsController extends Controller {
             ]);
         }
 
+        
 
     //$this->url->redirect('adress');
     }
