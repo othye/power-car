@@ -22,7 +22,7 @@
             var city = element.city
             var zip = element.zip
            
-            console.log(ltd);
+            console.log(city);
             console.log(lgd);
             console.log(element.zip)
 
@@ -48,7 +48,14 @@
                     '<br><b> Type de charge:</b> ' + charge + 
                     '<br><b> Nombre PDC :</b> ' + pdc + 
                     '<br><b> Type connecteur:</b> '+ connector +'</em>')
-                .openPopup()        
+                .openPopup()  
+
+                var all = L.latLng([ltd, lgd]);
+                map.fitBounds([
+                    all
+                ]);
+
+
             });
         });
     </script>

@@ -11,7 +11,7 @@ class StationsController extends Controller {
         echo $this->twig->render('stations/index.html.twig');
     }
 
-    /*public function insert(){
+    public function insert(){
         
         ini_set('auto_detect_line_endings',TRUE);
         $handle = fopen('./files/stations.csv','r');
@@ -68,7 +68,7 @@ class StationsController extends Controller {
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
-    } */
+    } 
 
     public function address($zip) 
     {
@@ -88,21 +88,21 @@ class StationsController extends Controller {
             $queryBuilder = $stations->getQueryHelper();
             $queryBuilder->orWhere("zip", '=', '"'.$_GET['search'].'"');
             $queryBuilder->orWhere("city", 'LIKE', '"%'.$_GET['search'].'%"');
-            $queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
+            //$queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
             $stations->setQueryHelper($queryBuilder);
 
             $array = [];
 
             foreach($stations as $key => $station) {
-                $array[$key] = $station;
-                $array[$key]->technicals = [];
+                $array[$key] = $station->toArray();
+                $array[$key]['technicals'] = [];
 
                 foreach($station->getTechnicals() as $technical) {
-                    $array[$key]->technicals[] = $technical;
+                    $array[$key]['technicals'][] = $technical->toArray();
                 }
             }
 
-            //echo '<pre>'; var_dump($technical->company); die();
+            //echo '<pre>'; var_dump($array); die();
             
             echo $this->twig->render('stations/index.html.twig',[  
                 'stations' => $array
