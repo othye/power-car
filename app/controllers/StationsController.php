@@ -70,7 +70,7 @@ class StationsController extends Controller {
         ini_set('auto_detect_line_endings',FALSE);
     } 
 
-    public function address($zip) 
+    /*public function address($zip) 
     {
         $station = Stations::find([
             //'id' => $id,
@@ -78,7 +78,9 @@ class StationsController extends Controller {
         ]); 
 
         var_dump($station);
-    }
+    }*/
+
+    
     public function search()
     {
 
@@ -94,15 +96,15 @@ class StationsController extends Controller {
             $array = [];
 
             foreach($stations as $key => $station) {
-                $array[$key] = $station->toArray();
-                $array[$key]['technicals'] = [];
+                $array[$key] = $station;
+                $array[$key]->technicals = [];
 
                 foreach($station->getTechnicals() as $technical) {
-                    $array[$key]['technicals'][] = $technical->toArray();
+                    $array[$key]->technicals[] = $technical;
                 }
             }
 
-            //echo '<pre>'; var_dump($array); die();
+            //echo '<pre>'; var_dump(json_encode($array)); die();
             
             echo $this->twig->render('stations/index.html.twig',[  
                 'stations' => $array
