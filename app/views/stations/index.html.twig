@@ -12,19 +12,43 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
+               
         var search = {{ stations|json_encode()|raw }};
         $.each(search, function(key, element) {
+            var name = element.name_station;
             var ltd = element.latitude;
             var lgd = element.longitude;
-
-
+            var address = element.address;
+            var city = element.city
+            var zip = element.zip
+           
             console.log(ltd);
             console.log(lgd);
             console.log(element.zip)
-            
 
             $.each(element.technicals, function(key2, technical) {
-                console.log(technical);
+                
+                var compagny = technical.company;
+                var charge = technical.charge_type;
+                var pdc = technical.nbr_pdc;
+                var connector = technical.connectors_type;
+
+
+
+               // L.marker([ltd, lgd]).addTo(map)
+               // .bindPopup(popupContent)
+               // .openPopup()
+
+                var layer = L.marker([ltd, lgd]).addTo(map)
+               
+                .bindPopup(
+                    '<em>' +name + 
+                    '<br>' + address +' '+ zip + ' ' + city +
+                    '<br>' + compagny + 
+                    '<br> Type de charge: ' + charge + 
+                    '<br> Nombre PDC : ' + pdc + 
+                    '<br> Type connecteur: '+ connector +'</em>')
+                .openPopup()        
             });
         });
     </script>
