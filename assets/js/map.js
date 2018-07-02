@@ -1,6 +1,6 @@
 var map = L.map('map',{
     center: [47.094109, 2.211040],
-    zoom: 6
+    zoom: 15
 });
 
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
