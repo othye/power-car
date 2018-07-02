@@ -24,7 +24,11 @@
             
 
             $.each(element.technicals, function(key2, technical) {
-                console.log(technical);
+                console.log(technical.comp);
+
+                 L.marker([ltd, lgd]).addTo(map)
+                .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+                .openPopup();
             });
         });
     </script>
