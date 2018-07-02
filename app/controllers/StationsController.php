@@ -70,7 +70,7 @@ class StationsController extends Controller {
         ini_set('auto_detect_line_endings',FALSE);
     } */
 
-    public function address($zip) 
+    /*public function address($zip) 
     {
         $station = Stations::find([
             //'id' => $id,
@@ -78,7 +78,9 @@ class StationsController extends Controller {
         ]); 
 
         var_dump($station);
-    }
+    }*/
+
+    
     public function search()
     {
 
