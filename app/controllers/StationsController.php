@@ -11,7 +11,7 @@ class StationsController extends Controller {
         echo $this->twig->render('stations/index.html.twig');
     }
 
-    /*public function insert(){
+    public function insert(){
         
         ini_set('auto_detect_line_endings',TRUE);
         $handle = fopen('./files/stations.csv','r');
@@ -68,9 +68,9 @@ class StationsController extends Controller {
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
-    } */
+    }
 
-    /*public function address($zip) 
+    public function address($zip) 
     {
         $station = Stations::find([
             //'id' => $id,
@@ -78,7 +78,7 @@ class StationsController extends Controller {
         ]); 
 
         var_dump($station);
-    }*/
+    }
     
     public function search()
     {
@@ -111,6 +111,6 @@ class StationsController extends Controller {
         }
 
 
-    //$this->url->redirect('adress');
+    $this->url->redirect('adress');
     }
 }
