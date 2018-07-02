@@ -42,12 +42,12 @@
                 var layer = L.marker([ltd, lgd]).addTo(map)
                
                 .bindPopup(
-                    '<em>' +name + 
-                    '<br>' + address +' '+ zip + ' ' + city +
+                    '<em><b>' +name + 
+                    '</b><br>' + address +' '+ zip + ' ' + city +
                     '<br>' + compagny + 
-                    '<br> Type de charge: ' + charge + 
-                    '<br> Nombre PDC : ' + pdc + 
-                    '<br> Type connecteur: '+ connector +'</em>')
+                    '<br><b> Type de charge:</b> ' + charge + 
+                    '<br><b> Nombre PDC :</b> ' + pdc + 
+                    '<br><b> Type connecteur:</b> '+ connector +'</em>')
                 .openPopup()        
             });
         });
