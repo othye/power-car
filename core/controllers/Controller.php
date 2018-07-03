@@ -28,7 +28,7 @@ class Controller
     {
         if ($this->db === null && getenv('MYSQL_DATABASE') != '') {
             $this->db = PicORM::configure(array(
-                'datasource' => new \PDO('mysql:dbname='.getenv('MYSQL_DATABASE').';host='.getenv('MYSQL_HOST').'', getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'))
+                'datasource' => new \PDO('mysql:dbname='.getenv('MYSQL_DATABASE').';host='.getenv('MYSQL_HOST').'', getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'), array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.getenv('MYSQL_CHARSET')))
             ));
         }
     }

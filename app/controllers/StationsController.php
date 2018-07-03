@@ -103,8 +103,6 @@ class StationsController extends Controller {
                     $array[$key]->technicals[] = $technical;
                 }
             }
-
-            //echo '<pre>'; var_dump(json_encode($array)); die();
             
             echo $this->twig->render('stations/index.html.twig',[  
                 'stations' => $array
