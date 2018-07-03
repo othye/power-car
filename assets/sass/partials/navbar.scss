@@ -1,7 +1,3 @@
-.navbar-fixed, nav{
-    height: 100px;
-    background-color: gray;
-}
 #form1{
     margin-left: 500px;
     width: 50vh;
@@ -10,37 +6,26 @@
     margin-top: 25px;
 
 }
-div > nav > div > a > img {
-    margin-left: 100px;
-}
-@media only screen and (max-width: 992px){
-
-    nav .brand-logo{
-        left: 5%;
-    }
-}
-@media only screen and (max-width: 700px){
-
-    nav .brand-logo{
-        left: 5%;
-    }
-    #form1{
-        width: 30vh;
-    }
-}
-@media only screen and (max-width: 550px){
-    #form1 {
-        width: 30vh;
-    }
-    div > nav > div > a > img {
-        height: 70px;
-        margin-top: 15px;
-        margin-left: 60px;
-    }
-}
-i {
+#send {
     margin-top: -10px;
 }
+#span{
+    position: absolute;
+    top: 25px; 
+    font-family: 'Ubuntu',sans-serif,serif;
+    margin-left: 20px;
+}
+#bton {
+    position: absolute;
+    top: 25px;
+    color: white;
+    left: 215px;
+}
+.navbar-fixed, nav{
+    height: 100px;
+    background-color: gray;
+}
+
 input[type=search]:not(.browser-default){
     border-bottom: solid 1px white;
 }
@@ -61,10 +46,60 @@ input[type=search]:not(.browser-default):focus:not([readonly]){
     border-bottom: 1px solid grey;
     box-shadow: 0 1px 0 0 black;
 }
-@media only screen and (max-height: 830px){
-    
-    input[type=search]:not(.browser-default){
-        
-    }
 
+@media only screen and (max-width: 992px){
+    #form1{
+        width: 30vh;
+    }
+}
+@media only screen and (max-width: 700px){
+
+    nav .brand-logo.center{
+        left: 2%;
+        top: 15%;
+    }
+    div > nav > div > a > img {
+        height: 70px;
+        position: absolute;
+    }
+    #form1{
+        width: 25vh;
+    }
+    #span, #bton{
+        margin-left: 240px;    
+    }
+    #bton{
+        margin-left: 200px;
+    }
+}
+@media only screen and (max-width: 630px){
+    #span, #bton{
+        margin-left: 150px;    
+    }
+    #bton{
+        margin-left: 110px;
+    }
+}
+@media only screen and (max-width: 550px){
+    #form1 {
+        width: 20vh;
+    }
+    div > nav > div > a > img {
+        height: 70px;
+    }
+    nav .brand-logo.center{
+        left: 2%;
+        top: 15%;
+    }
+    #span {
+        display: none;
+    }
+    #bton{
+        margin-left: 50px;
+    }
+}
+@media only screen and (max-width: 450px){
+        #bton{
+        margin-left: -50px;
+    }
 }

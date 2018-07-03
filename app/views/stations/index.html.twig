@@ -12,14 +12,26 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
+       
 
         var allStations = {{ allStations|json_encode()|raw }};
-        console.log(allStations);
+        //console.log(allStations);
         
         $.each(allStations, function(key3, allStations) {
+            var name = allStations.name_station;
+            var address = allStations.address;
+            var city = allStations.city;
+            var zip = allStations.zip;
             var all = [allStations.latitude, allStations.longitude];
-                    console.log(all);
-            L.marker(all).addTo(map)
+            var popups = ""
+
+        
+
+                popups += '<em><b>' +name + 
+                    '</b><br>' + address +' '+ zip + ' ' + city +'</em>'
+            
+
+            L.marker(all).addTo(map).bindPopup(popups)
         });
 
 
@@ -43,18 +55,19 @@
                 var pdc = technical.nbr_pdc;
                 var connector = technical.connectors_type;
 
-                textPopup += '<em><b>' +name + 
+                textPopup += '<em><b>' +name +
                     '</b><br>' + address +' '+ zip + ' ' + city +
                     '<br>' + compagny + 
                     '<br><b> Type de charge:</b> ' + charge + 
                     '<br><b> Nombre PDC :</b> ' + pdc + 
                     '<br><b> Type connecteur:</b> '+ connector +'</em>'
-            });
+   
 
             L.marker(pos).addTo(map).bindPopup(textPopup)
         });
 
         map.fitBounds(bounds);
+    })
                
     </script>
 {% endblock %}

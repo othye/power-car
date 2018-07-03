@@ -1,15 +1,21 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper">
-            <a href="{{ url('') }}" class="brand-logo">
+
+            <span id="span"> Affichez toutes les stations </span>
+                <a id="bton" href="{{ url('allStations') }}"><i class="large material-icons">map</i></a>                
+       
+            <a href="{{ url('') }}" class="center brand-logo">
                 <img height="100px"src="./assets/img/logoPowerCarr.png" alt="logodusite">
             </a>
+
             <form method="get" action="{{ url('search') }}" name="formulaire" id="form1" class="right">       
                 <input id="search" name="search" placeholder="CP/Ville" type="search">
                 <label class="label-icon" for="search"></label>
-                <button class="btn" value="Recherche" name="envoi" type="submit" ><i class="material-icons right">send</i>
+                <button id="send" class="medium btn" value="Recherche" name="envoi" type="submit" ><i class="material-icons right">send</i>
                 </button>
             </form>
+
         </div>
     </nav>
 </div>
