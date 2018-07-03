@@ -76,8 +76,12 @@ class StationsController extends Controller {
         $stationsArray = [];
         foreach($allStations as $key => $allStation) {
             $stationsArray[$key] = $allStation;
+
+            foreach($allStation->getTechnicals() as $allTechnical) {
+                $array[$key]->technicalArray[] = $allTechnical;
+            }
         }
-        //echo '<pre>'; var_dump($stationsArray); die();
+        //echo '<pre>'; var_dump($allTechnical->company); die();
         
        echo $this->twig->render('stations/index.html.twig',[  
             'allStations' => $stationsArray 
