@@ -52,6 +52,7 @@ class StationsController extends Controller {
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
+
     }
     public function allStations() 
     {
@@ -59,6 +60,7 @@ class StationsController extends Controller {
         $stationsArray = [];
         foreach($allStations as $key => $allStation) {
             $stationsArray[$key] = $allStation;
+
             foreach($allStation->getTechnicals() as $allTechnical) {
                 $array[$key]->technicalArray[] = $allTechnical;
             }
