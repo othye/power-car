@@ -68,22 +68,29 @@ class StationsController extends Controller {
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
+<<<<<<< HEAD
     } 
+=======
+    }
+>>>>>>> aa565a5e646664e1b734f9a84b60bb0de02968fa
 
-    /*public function address($zip) 
+    public function allStations() 
     {
-        $station = Stations::find([
-            //'id' => $id,
-            'zip' => $zip
-        ]); 
+        $allStations = Stations::find();
+        $stationsArray = [];
+        foreach($allStations as $key => $allStation) {
+            $stationsArray[$key] = $allStation;
+        }
+        //echo '<pre>'; var_dump($stationsArray); die();
+        
+       echo $this->twig->render('stations/index.html.twig',[  
+            'allStations' => $stationsArray 
+        ]);
+    }
 
-        var_dump($station);
-    }*/
 
-    
     public function search()
     {
-
         if(isset($_GET['envoi']) && !empty($_GET['search']) ) 
         {   
             $stations = Stations::find();
@@ -109,6 +116,7 @@ class StationsController extends Controller {
             ]);
         }
 
+        
 
     //$this->url->redirect('adress');
     }
