@@ -68,11 +68,7 @@ class StationsController extends Controller {
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
-<<<<<<< HEAD
     } 
-=======
-    }
->>>>>>> aa565a5e646664e1b734f9a84b60bb0de02968fa
 
     public function allStations() 
     {
