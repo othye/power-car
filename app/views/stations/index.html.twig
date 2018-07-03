@@ -11,40 +11,41 @@
 
 {% block javascripts %}
     {{ parent() }}
+    
     <script>
-               
+
         var search = {{ stations|json_encode()|raw }};
+        var bounds = [];
+
         $.each(search, function(key, element) {
             var name = element.name_station;
-            var ltd = element.latitude;
-            var lgd = element.longitude;
             var address = element.address;
-            var city = element.city
-            var zip = element.zip
-           
-            console.log(ltd);
-            console.log(lgd);
-            console.log(element.zip)
+            var city = element.city;
+            var zip = element.zip;
+            var pos = [element.latitude, element.longitude];
+            var textPopup = "";
+
+            bounds[key] = pos;
 
             $.each(element.technicals, function(key2, technical) {
-                
                 var compagny = technical.company;
                 var charge = technical.charge_type;
                 var pdc = technical.nbr_pdc;
                 var connector = technical.connectors_type;
 
-                var layer = L.marker([ltd, lgd]).addTo(map)
-               
-                .bindPopup(
-                    '<em><b>' +name + 
+                textPopup += '<em><b>' +name +
                     '</b><br>' + address +' '+ zip + ' ' + city +
                     '<br>' + compagny + 
                     '<br><b> Type de charge:</b> ' + charge + 
                     '<br><b> Nombre PDC :</b> ' + pdc + 
-                    '<br><b> Type connecteur:</b> '+ connector +'</em>')
-                .openPopup()        
+                    '<br><b> Type connecteur:</b> '+ connector +'</em>'
+   
 
-            });
+            L.marker(pos).addTo(map).bindPopup(textPopup)
         });
+
+        map.fitBounds(bounds);
+    })
+               
     </script>
 {% endblock %}

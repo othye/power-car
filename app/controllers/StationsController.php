@@ -70,7 +70,7 @@ class StationsController extends Controller {
         ini_set('auto_detect_line_endings',FALSE);
     }
 
-    public function address($zip) 
+    /*public function address($zip) 
     {
         $station = Stations::find([
             //'id' => $id,
@@ -78,7 +78,9 @@ class StationsController extends Controller {
         ]); 
 
         var_dump($station);
-    }
+
+    }*/
+
     
     public function search()
     {
@@ -89,7 +91,7 @@ class StationsController extends Controller {
             $queryBuilder = $stations->getQueryHelper();
             $queryBuilder->orWhere("zip", '=', '"'.$_GET['search'].'"');
             $queryBuilder->orWhere("city", 'LIKE', '"%'.$_GET['search'].'%"');
-            $queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
+            //$queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
             $stations->setQueryHelper($queryBuilder);
 
             $array = [];
@@ -103,7 +105,7 @@ class StationsController extends Controller {
                 }
             }
 
-            //echo '<pre>'; var_dump($technical->company); die();
+            //echo '<pre>'; var_dump($array); die();
             
             echo $this->twig->render('stations/index.html.twig',[  
                 'stations' => $array
