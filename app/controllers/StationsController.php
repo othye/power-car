@@ -1,13 +1,21 @@
 <?php
+
 namespace Controllers;
+
 use Core\Controllers\Controller;
 use Model\Stations;
 use Model\Technicals;
+
 class StationsController extends Controller {
+
     public function index() {
+
+        $this->nearestStations(46.674393, 5.551210);
         echo $this->twig->render('stations/index.html.twig');
     }
-    public function insert(){
+
+    public function insert() // Inserer les données du fichier *.CSV dans la base de données
+    {
         
         ini_set('auto_detect_line_endings',TRUE);
         $handle = fopen('./files/stations.csv','r');
@@ -52,9 +60,32 @@ class StationsController extends Controller {
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
+    } 
 
+    private function nearestStations($locationLatitude, $locationLongitude) {
+        
+       $sql = "SELECT * , ( 3959 * ACOS( COS( RADIANS( :locationLatitude ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( :locationLongitude ) ) + SIN( RADIANS( :locationLatitude  ) ) * SIN( RADIANS( latitude )))) AS distance
+                FROM stations
+                HAVING distance < 25
+                ORDER BY distance";
+        
+        // $pdo = \PicORM::getDataSource();
+       
+        $pdo = $this->pdo;
+        
+       $query = $pdo->prepare($sql);
+
+       $query->execute([
+           'locationLatitude' => $locationLatitude,
+           'locationLongitude' => $locationLongitude
+       ]);
+
+       
+       //echo '<pre>'; var_dump($query->fetchAll());die;
+       echo json_encode($query->fetchAll());
     }
-    public function allStations() 
+
+    public function allStations() // afficher toutes les bornes sur la carte
     {
         $allStations = Stations::find();
         $stationsArray = [];
@@ -71,15 +102,17 @@ class StationsController extends Controller {
             'allStations' => $stationsArray 
         ]);
     }
-    public function search()
+
+
+    public function search() // afficher les bornes par recherches (par ville ou code postale)
     {
         if(isset($_GET['envoi']) && !empty($_GET['search']) ) 
         {   
-            $stations = Stations::find();
+            $stations = Stations::find(); // requete SELECT * FROM Stations
             $queryBuilder = $stations->getQueryHelper();
-            $queryBuilder->orWhere("zip", '=', '"'.$_GET['search'].'"');
-            $queryBuilder->orWhere("city", 'LIKE', '"%'.$_GET['search'].'%"');
-            //$queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
+            $queryBuilder->orWhere("zip", '=', '"'.$_GET['search'].'"'); // par codes postales
+            $queryBuilder->orWhere("city", 'LIKE', '"%'.$_GET['search'].'%"'); // Ou par villes
+            $queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
             $stations->setQueryHelper($queryBuilder);
             $array = [];
             foreach($stations as $key => $station) {
@@ -94,7 +127,10 @@ class StationsController extends Controller {
                 'stations' => $array
             ]);
         }
-        
+       
     //$this->url->redirect('adress');
     }
+
+    
+
 }
