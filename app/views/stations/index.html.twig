@@ -12,26 +12,59 @@
 {% block javascripts %}
     {{ parent() }}
     <script>
-       
 
-        var allStations = {{ allStations|json_encode()|raw }};
-        //console.log(allStations);
         
-        $.each(allStations, function(key3, allStations) {
+        function initializeMapAndLocator(){
+
+            var nearestStations = {{ nearestStations|json_encode()|raw }};
+
+            L.control.locate({
+   
+                strings: {
+                    title: "Show me Where I am, yo!",
+                }
+            
+            }).addTo(map);
+
+            
+            function onLocationFound(nearestStations) {
+
+                var radius = nearestStations.accuracy /2;
+                
+                var all = [nearestStations.latitude, nearestStations.longitude];
+
+                var latlng = L.latLng(all);
+
+                L.marker(nearestStations.latlng).addTo(map)
+                    .bindPopup("You are within " + radius + " meters from this point").openPopup();
+                L.circle(nearestStations.latlng, radius).addTo(map);
+            }
+
+            map.on('locationfound', onLocationFound);
+
+        }
+        initializeMapAndLocator();
+        
+        
+        var allStations = {{ allStations|json_encode()|raw }}; // recupérer les données sur le controller
+        //console.log(allStations);
+       
+        
+        $.each(allStations, function(key3, allStations) {   // stcker les données dans des variable
             var name = allStations.name_station;
             var address = allStations.address;
             var city = allStations.city;
             var zip = allStations.zip;
             var all = [allStations.latitude, allStations.longitude];
-            var popups = ""
+            var popups = "";
 
         
 
                 popups += '<em><b>' +name + 
-                    '</b><br>' + address +' '+ zip + ' ' + city +'</em>'
+                    '</b><br>' + address +' '+ zip + ' ' + city +'</em>';
             
 
-            L.marker(all).addTo(map).bindPopup(popups)
+            L.marker(all).addTo(map).bindPopup(popups); // Ajouter les marqueur sur la carte
         });
 
 
@@ -66,7 +99,11 @@
             L.marker(pos).addTo(map).bindPopup(textPopup)
         });
 
-        map.fitBounds(bounds);
+        map.fitBounds(bounds); // zoom vers les marqueurs
                
+
+        
+
+        
     </script>
 {% endblock %}
