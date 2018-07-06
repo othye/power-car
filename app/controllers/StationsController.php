@@ -116,7 +116,7 @@ class StationsController extends Controller {
         // $pdo = \PicORM::getDataSource();
         $pdo = $this->pdo;
 
-        var_dump($pdo);
+       /* var_dump($pdo);*/
     }
 
 }
