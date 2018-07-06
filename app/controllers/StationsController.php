@@ -1,12 +1,19 @@
 <?php
+
 namespace Controllers;
+
 use Core\Controllers\Controller;
 use Model\Stations;
 use Model\Technicals;
+
 class StationsController extends Controller {
+
     public function index() {
+        $this->nearestStations(46.674393, 5.551210);
+
         echo $this->twig->render('stations/index.html.twig');
     }
+
     public function insert(){
         
         ini_set('auto_detect_line_endings',TRUE);
@@ -54,6 +61,7 @@ class StationsController extends Controller {
         ini_set('auto_detect_line_endings',FALSE);
 
     }
+
     public function allStations() 
     {
         $allStations = Stations::find();
@@ -71,6 +79,7 @@ class StationsController extends Controller {
             'allStations' => $stationsArray 
         ]);
     }
+
     public function search()
     {
         if(isset($_GET['envoi']) && !empty($_GET['search']) ) 
@@ -97,4 +106,17 @@ class StationsController extends Controller {
         
     //$this->url->redirect('adress');
     }
+
+    private function nearestStations($longitude, $latitude) {
+        // $sql = "SELECT  * , ( 3959 * ACOS( COS( RADIANS( "+ $latitude +" ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( "+ $longitude +" ) ) + SIN( RADIANS( "+ $latitude +" ) ) * SIN( RADIANS( latitude )))) AS distance
+        //     FROM stations
+        //     HAVING distance < 25
+        //     ORDER BY distance";
+
+        // $pdo = \PicORM::getDataSource();
+        $pdo = $this->pdo;
+
+        var_dump($pdo);
+    }
+
 }
