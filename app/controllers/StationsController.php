@@ -9,13 +9,8 @@ use Model\Technicals;
 class StationsController extends Controller {
 
     public function index() {
-<<<<<<< HEAD
 
         $this->nearestStations(46.674393, 5.551210);
-=======
-        $this->nearestStations(46.674393, 5.551210);
-
->>>>>>> d3f2eac387873d6e39e4ebfa5646a73f66d61462
         echo $this->twig->render('stations/index.html.twig');
     }
 
@@ -65,7 +60,6 @@ class StationsController extends Controller {
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
-<<<<<<< HEAD
     } 
 
     private function nearestStations($locationLatitude, $locationLongitude) {
@@ -89,9 +83,6 @@ class StationsController extends Controller {
        
        //echo '<pre>'; var_dump($query->fetchAll());die;
        echo json_encode($query->fetchAll());
-=======
-
->>>>>>> d3f2eac387873d6e39e4ebfa5646a73f66d61462
     }
 
     public function allStations() // afficher toutes les bornes sur la carte
@@ -112,12 +103,8 @@ class StationsController extends Controller {
         ]);
     }
 
-<<<<<<< HEAD
 
     public function search() // afficher les bornes par recherches (par ville ou code postale)
-=======
-    public function search()
->>>>>>> d3f2eac387873d6e39e4ebfa5646a73f66d61462
     {
         if(isset($_GET['envoi']) && !empty($_GET['search']) ) 
         {   
@@ -140,24 +127,10 @@ class StationsController extends Controller {
                 'stations' => $array
             ]);
         }
-<<<<<<< HEAD
        
-=======
-        
->>>>>>> d3f2eac387873d6e39e4ebfa5646a73f66d61462
     //$this->url->redirect('adress');
     }
 
-    private function nearestStations($longitude, $latitude) {
-        // $sql = "SELECT  * , ( 3959 * ACOS( COS( RADIANS( "+ $latitude +" ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( "+ $longitude +" ) ) + SIN( RADIANS( "+ $latitude +" ) ) * SIN( RADIANS( latitude )))) AS distance
-        //     FROM stations
-        //     HAVING distance < 25
-        //     ORDER BY distance";
-
-        // $pdo = \PicORM::getDataSource();
-        $pdo = $this->pdo;
-
-        var_dump($pdo);
-    }
+    
 
 }

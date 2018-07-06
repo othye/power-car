@@ -15,10 +15,7 @@ class Controller
     protected $flashbag;
     protected $db = null;
     protected $pdo;
-<<<<<<< HEAD
     
-=======
->>>>>>> d3f2eac387873d6e39e4ebfa5646a73f66d61462
 
     function __construct()
     {
@@ -35,10 +32,6 @@ class Controller
                 'datasource' => new \PDO('mysql:dbname='.getenv('MYSQL_DATABASE').';host='.getenv('MYSQL_HOST').'', getenv('MYSQL_USER'), getenv('MYSQL_PASSWORD'), array(\PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES '.getenv('MYSQL_CHARSET')))
             ));
 
-<<<<<<< HEAD
-=======
-
->>>>>>> d3f2eac387873d6e39e4ebfa5646a73f66d61462
             $this->pdo = PicORM::getDataSource();
         }
     }
