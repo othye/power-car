@@ -88,18 +88,23 @@
                 var pdc = technical.nbr_pdc;
                 var connector = technical.connectors_type;
 
-                textPopup += '<em><b>' +name + 
+                textPopup += '<em><b>' +name +
                     '</b><br>' + address +' '+ zip + ' ' + city +
                     '<br>' + compagny + 
                     '<br><b> Type de charge:</b> ' + charge + 
                     '<br><b> Nombre PDC :</b> ' + pdc + 
                     '<br><b> Type connecteur:</b> '+ connector +'</em>'
-            });
+   
 
             L.marker(pos).addTo(map).bindPopup(textPopup)
         });
 
+<<<<<<< HEAD
         map.fitBounds(bounds); // zoom vers les marqueurs
+=======
+        map.fitBounds(bounds);
+    })
+>>>>>>> d3f2eac387873d6e39e4ebfa5646a73f66d61462
                
 
         
