@@ -16,8 +16,8 @@
 
 - path: 
   - /nearStation
-  controller: Controllers\StationsController::nearStation
-
+  controller: Controllers\StationsController::nearestStations
+  
 - path:
   - 
   controller: Controllers\StationsController::index

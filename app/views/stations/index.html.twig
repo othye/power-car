@@ -13,10 +13,11 @@
     {{ parent() }}
     <script>
 
-        
+        initializeMapAndLocator();
+
         function initializeMapAndLocator(){
 
-            var nearestStations = {{ nearestStations|json_encode()|raw }};
+            //var nearestStations = {{ nearestStations|json_encode()|raw }};
 
             L.control.locate({
    
@@ -26,25 +27,68 @@
             
             }).addTo(map);
 
-            
-            function onLocationFound(nearestStations) {
-
-                var radius = nearestStations.accuracy /2;
-                
-                var all = [nearestStations.latitude, nearestStations.longitude];
-
-                var latlng = L.latLng(all);
-
-                L.marker(nearestStations.latlng).addTo(map)
-                    .bindPopup("You are within " + radius + " meters from this point").openPopup();
-                L.circle(nearestStations.latlng, radius).addTo(map);
-            }
-
             map.on('locationfound', onLocationFound);
 
         }
-        initializeMapAndLocator();
-        
+
+                    
+        function onLocationFound(myPosition) {
+            
+            $.ajax({
+                
+                //myPosition.latitude
+                //myPosition.longitude
+                //nearStation/46.674223/5.551638
+                
+                //au retour de l'appel
+                // boucler sur les résultats du json
+                // ajouter les markers
+
+                url: `${window.location.href}nearStation`,
+                type : 'POST', 
+                dataType: 'JSON',
+                data: { lat: myPosition.latitude, lon: myPosition.longitude },
+                success : function(datas, statut){
+      
+                    //console.log(datas);
+
+                    $.each(datas, function(key4, data) {
+                        var name = data.name_station;
+                        var address = data.address;
+                        var city = data.city;
+                        var zip = data.zip;
+                        var all = [data.latitude, data.longitude];
+                        var popups = "";
+                        popups += '<em><b>' +name + 
+                            '</b><br>' + address +' '+ zip + ' ' + city +'</em>';
+
+                        L.marker(all).addTo(map).bindPopup(popups); // Ajouter les marqueur sur la carte
+
+                    });
+
+
+
+                    /*var radius = myPosition.accuracy /2;
+
+                    var all = [myPosition.latitude, myPosition.longitude];
+
+                    var latlng = L.latLng(all);
+
+                    L.marker(myPosition.latlng).addTo(map)
+                    L.circle(myPosition.latlng, radius).addTo(map);*/
+
+                },
+
+                error : function(data ,statut, erreur){
+                    
+                    console.log(erreur)
+
+                },
+
+            });
+            
+        }
+    
         
         var allStations = {{ allStations|json_encode()|raw }}; // recupérer les données sur le controller
         //console.log(allStations);
@@ -58,11 +102,8 @@
             var all = [allStations.latitude, allStations.longitude];
             var popups = "";
 
-        
-
-                popups += '<em><b>' +name + 
-                    '</b><br>' + address +' '+ zip + ' ' + city +'</em>';
-            
+            popups += '<em><b>' +name + 
+                '</b><br>' + address +' '+ zip + ' ' + city +'</em>';
 
             L.marker(all).addTo(map).bindPopup(popups); // Ajouter les marqueur sur la carte
         });
@@ -96,17 +137,12 @@
                     '<br><b> Type connecteur:</b> '+ connector +'</em>'
    
 
-            L.marker(pos).addTo(map).bindPopup(textPopup)
-        });
+                L.marker(pos).addTo(map).bindPopup(textPopup)
+            });
 
-<<<<<<< HEAD
-        map.fitBounds(bounds); // zoom vers les marqueurs
-=======
-        map.fitBounds(bounds);
-    })
->>>>>>> d3f2eac387873d6e39e4ebfa5646a73f66d61462
+            map.fitBounds(bounds); // zoom vers les marqueurs
                
-
+        });
         
 
         

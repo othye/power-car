@@ -10,7 +10,7 @@ class StationsController extends Controller {
 
     public function index() {
 
-        $this->nearestStations(46.674393, 5.551210);
+        //$this->nearestStations(46.674393, 5.551210);
         echo $this->twig->render('stations/index.html.twig');
     }
 
@@ -62,11 +62,14 @@ class StationsController extends Controller {
         ini_set('auto_detect_line_endings',FALSE);
     } 
 
-    private function nearestStations($locationLatitude, $locationLongitude) {
-        
+    public function nearestStations() {
+
+        $locationLatitude = $_POST['lat'];
+        $locationLongitude = $_POST['lon'];
+      
        $sql = "SELECT * , ( 3959 * ACOS( COS( RADIANS( :locationLatitude ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( :locationLongitude ) ) + SIN( RADIANS( :locationLatitude  ) ) * SIN( RADIANS( latitude )))) AS distance
                 FROM stations
-                HAVING distance < 25
+                HAVING distance < 15
                 ORDER BY distance";
         
         // $pdo = \PicORM::getDataSource();
@@ -80,9 +83,11 @@ class StationsController extends Controller {
            'locationLongitude' => $locationLongitude
        ]);
 
-       
-       //echo '<pre>'; var_dump($query->fetchAll());die;
-       echo json_encode($query->fetchAll());
+       $datas = $query->fetchAll();
+
+       //var_dump($data); die();
+      
+       echo json_encode($datas);
     }
 
     public function allStations() // afficher toutes les bornes sur la carte
@@ -131,6 +136,6 @@ class StationsController extends Controller {
     //$this->url->redirect('adress');
     }
 
-    
+
 
 }
