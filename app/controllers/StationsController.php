@@ -69,7 +69,7 @@ class StationsController extends Controller {
       
        $sql = "SELECT * , ( 3959 * ACOS( COS( RADIANS( :locationLatitude ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( :locationLongitude ) ) + SIN( RADIANS( :locationLatitude  ) ) * SIN( RADIANS( latitude )))) AS distance
                 FROM stations
-                HAVING distance < 15
+                HAVING distance < 20
                 ORDER BY distance";
        
         $pdo = $this->pdo;
