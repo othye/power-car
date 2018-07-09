@@ -1,3 +1,18 @@
+.imgLogo {
+  margin-top: 10px;
+}
+
+@media only screen and (max-width: 700px) {
+  .imgLogo {
+  margin-top: 0px; } 
+}
+
+@media only screen and (max-width: 359px) {
+  .large, .material-icons .all {
+  margin-top: -25px;
+  margin-left: -80px; } 
+}
+
 .materialize-red {
   background-color: #e51c23 !important; }
 
@@ -6165,7 +6180,9 @@ input[type=range]::-ms-thumb {
   .tap-target-wrapper.open .tap-target-wave::after {
     visibility: visible;
     animation: pulse-animation 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
-    transition: opacity .3s, transform .3s, visibility 0s 1s; }
+    transition: opacity .3s,
+ transform .3s,
+ visibility 0s 1s; }
 
 .tap-target {
   position: absolute;
@@ -6200,7 +6217,9 @@ input[type=range]::-ms-thumb {
     transition: transform .3s; }
   .tap-target-wave::after {
     visibility: hidden;
-    transition: opacity .3s, transform .3s, visibility 0s;
+    transition: opacity .3s,
+ transform .3s,
+ visibility 0s;
     z-index: -1; }
 
 .tap-target-origin {

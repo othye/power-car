@@ -71,17 +71,14 @@ class StationsController extends Controller {
                 FROM stations
                 HAVING distance < 15
                 ORDER BY distance";
-        
-        // $pdo = \PicORM::getDataSource();
        
         $pdo = $this->pdo;
-        
-       $query = $pdo->prepare($sql);
+        $query = $pdo->prepare($sql);
 
-       $query->execute([
+        $query->execute([
            'locationLatitude' => $locationLatitude,
            'locationLongitude' => $locationLongitude
-       ]);
+        ]);
 
        $datas = $query->fetchAll();
 

@@ -2,11 +2,11 @@
     <nav>
         <div class="nav-wrapper">
 
-            <span id="span"> <b>Affichez toutes les bornes</b> </span>
-                <a id="bton" href="{{ url('allStations') }}"><i class="large material-icons">map</i></a>                
+            <span id="span"> Affichez toutes les stations </span>
+                <a id="bton" href="{{ url('allStations') }}"><i class="large material-icons all">map</i></a>                
        
             <a href="{{ url('') }}" class="center brand-logo">
-                <img height="100px"src="./assets/img/logoPowerCarr.png" alt="logodusite">
+                <img class="imgLogo" height="80px"src="./assets/img/logoPowerCarr.png" alt="logodusite">
             </a>
 
             <form method="get" action="{{ url('search') }}" name="formulaire" id="form1" class="right">       
