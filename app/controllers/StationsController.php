@@ -62,27 +62,22 @@ class StationsController extends Controller {
         ini_set('auto_detect_line_endings',FALSE);
     } 
 
-    private function nearestStations($locationLatitude, $locationLongitude) {
-        
-       $sql = "SELECT * , ( 3959 * ACOS( COS( RADIANS( :locationLatitude ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( :locationLongitude ) ) + SIN( RADIANS( :locationLatitude  ) ) * SIN( RADIANS( latitude )))) AS distance
+    public function nearestStations($locationLatitude, $locationLongitude) {
+
+        $sql = "SELECT * , ( 3959 * ACOS( COS( RADIANS( :locationLatitude ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( :locationLongitude ) ) + SIN( RADIANS( :locationLatitude  ) ) * SIN( RADIANS( latitude )))) AS distance
                 FROM stations
                 HAVING distance < 25
                 ORDER BY distance";
-        
-        // $pdo = \PicORM::getDataSource();
        
         $pdo = $this->pdo;
-        
-       $query = $pdo->prepare($sql);
+        $query = $pdo->prepare($sql);
 
-       $query->execute([
+        $query->execute([
            'locationLatitude' => $locationLatitude,
            'locationLongitude' => $locationLongitude
-       ]);
+        ]);
 
-       
-       //echo '<pre>'; var_dump($query->fetchAll());die;
-       echo json_encode($query->fetchAll());
+        echo json_encode($query->fetchAll());
     }
 
     public function allStations() // afficher toutes les bornes sur la carte
@@ -129,18 +124,6 @@ class StationsController extends Controller {
         }
        
     //$this->url->redirect('adress');
-    }
-
-    private function nearestStations($longitude, $latitude) {
-        // $sql = "SELECT  * , ( 3959 * ACOS( COS( RADIANS( "+ $latitude +" ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( "+ $longitude +" ) ) + SIN( RADIANS( "+ $latitude +" ) ) * SIN( RADIANS( latitude )))) AS distance
-        //     FROM stations
-        //     HAVING distance < 25
-        //     ORDER BY distance";
-
-        // $pdo = \PicORM::getDataSource();
-        $pdo = $this->pdo;
-
-       /* var_dump($pdo);*/
     }
 
 }

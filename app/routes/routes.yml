@@ -15,8 +15,8 @@
   controller: Controllers\StationsController::allStations
 
 - path: 
-  - /nearStation
-  controller: Controllers\StationsController::nearStation
+  - /nearStation/([\d]+\.[\d]+)/([\d]+\.[\d]+)
+  controller: Controllers\StationsController::nearestStations
 
 - path:
   - 

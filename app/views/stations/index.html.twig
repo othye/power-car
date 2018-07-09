@@ -27,22 +27,25 @@
             }).addTo(map);
 
             
-            function onLocationFound(nearestStations) {
+            function onLocationFound(myPosition) {
 
-                var radius = nearestStations.accuracy /2;
+                var radius = myPosition.accuracy /2;
                 
-                var all = [nearestStations.latitude, nearestStations.longitude];
+                var all = [myPosition.latitude, myPosition.longitude];
 
                 var latlng = L.latLng(all);
 
-                L.marker(nearestStations.latlng).addTo(map)
+                L.marker(myPosition.latlng).addTo(map)
                     .bindPopup("You are within " + radius + " meters from this point").openPopup();
-                L.circle(nearestStations.latlng, radius).addTo(map);
+                L.circle(myPosition.latlng, radius).addTo(map);
+
+                //nearStation/46.674223/5.551638
+                console.log(myPosition);
             }
 
             map.on('locationfound', onLocationFound);
-
         }
+        
         initializeMapAndLocator();
         
         
@@ -99,12 +102,8 @@
             L.marker(pos).addTo(map).bindPopup(textPopup)
         });
 
-<<<<<<< HEAD
-        map.fitBounds(bounds); // zoom vers les marqueurs
-=======
         map.fitBounds(bounds);
     })
->>>>>>> d3f2eac387873d6e39e4ebfa5646a73f66d61462
                
 
         
