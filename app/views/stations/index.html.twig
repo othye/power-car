@@ -1,11 +1,13 @@
 {% extends "base.html.twig" %} 
 
 {% block content %}
-<section>
-    <article>
-        <div id="map"></div>
-    </article>
-</section>
+
+    <section>
+        <article>
+            <div id="map"></div>
+        </article>
+    </section>
+    
 {% endblock %}
 
 
@@ -16,9 +18,7 @@
         initializeMapAndLocator();
 
         function initializeMapAndLocator(){
-
-            //var nearestStations = {{ nearestStations|json_encode()|raw }};
-
+            // function géolocalisation
             L.control.locate({
                 setView: false,
                 strings: {
@@ -31,30 +31,22 @@
 
         }
 
-                    
+        // station autour de la geolocalisation
         function onLocationFound(myPosition) {
             
             $.ajax({
                 
-                //myPosition.latitude
-                //myPosition.longitude
-                //nearStation/46.674223/5.551638
-                
-                //au retour de l'appel
-                // boucler sur les résultats du json
-                // ajouter les markers
-
                 url: `${window.location.href}nearStation`,
-                type : 'POST', 
+                type : 'POST', // methode post 
                 dataType: 'JSON',
                 data: { lat: myPosition.latitude, lon: myPosition.longitude },
-                success : function(datas, statut){
+                success : function(datas, statut){   //au retour de l'appel
       
                     //console.log(datas);
 
                     var bounds = [];
 
-                    $.each(datas, function(key4, data) {
+                    $.each(datas, function(key4, data) {  // boucler sur les résultats du json
                         var name = data.name_station;
                         var address = data.address;
                         var city = data.city;
@@ -74,16 +66,6 @@
 
                      map.fitBounds(bounds); // zoom vers les marqueurs
 
-
-
-                    /*var radius = myPosition.accuracy /2;
-
-                    var all = [myPosition.latitude, myPosition.longitude];
-
-                    var latlng = L.latLng(all);
-
-                    L.marker(myPosition.latlng).addTo(map)
-                    L.circle(myPosition.latlng, radius).addTo(map);*/
 
                 },
 
@@ -121,7 +103,7 @@
         var search = {{ stations|json_encode()|raw }};
         var bounds = [];
 
-        $.each(search, function(key, element) {
+        $.each(search, function(key, element) { //  afficher les stations 
             var name = element.name_station;
             var address = element.address;
             var city = element.city;
@@ -131,7 +113,7 @@
 
             bounds[key] = pos;
 
-            $.each(element.technicals, function(key2, technical) {
+            $.each(element.technicals, function(key2, technical) { // afficher les fiches technique des stations
                 var compagny = technical.company;
                 var charge = technical.charge_type;
                 var pdc = technical.nbr_pdc;
@@ -151,8 +133,6 @@
             map.fitBounds(bounds); // zoom vers les marqueurs
                
         });
-        
-
-        
+                
     </script>
 {% endblock %}

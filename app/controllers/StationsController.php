@@ -10,7 +10,6 @@ class StationsController extends Controller {
 
     public function index() {
 
-        //$this->nearestStations(46.674393, 5.551210);
         echo $this->twig->render('stations/index.html.twig');
     }
 
@@ -21,15 +20,15 @@ class StationsController extends Controller {
         $handle = fopen('./files/stations.csv','r');
         while ( ($data = fgetcsv($handle) ) !== FALSE ) {
         //process
-            //print_r($data);
-            $station = Stations::findOne([
-                'station_ref' => $data[0]
+        
+            $station = Stations::findOne([ //  verifier si les données existe pas sur la base de données
+                'station_ref' => $data[0] 
             ]);
             if(!$station){
-                $station = new Stations();
+                $station = new Stations(); // insetion des données stations 
             }
             
-            $address = $data[2];
+            $address = $data[2]; // découpé l'adrese complet en adresse , code postale  et ville
             preg_match("/^(.*)(\d{5})(.*)$/", $address, $elems);
             
             $station->station_ref = $data[0];
@@ -39,14 +38,15 @@ class StationsController extends Controller {
             $station->city = ((isset($elems[3])) ? $elems[3] : null);
             $station->latitude = $data[3];
             $station->longitude = $data[4];
-            $station->save();
+            $station->save(); 
+
+
             $technicals = Technicals::findOne([
                 'id_station' => $station->id
             ]);
             if(!$technicals){
-                $technicals = new Technicals();
+                $technicals = new Technicals(); // insertion des données sous la table technicals
             }
-            
             
             $technicals->company = $data[5];
             $technicals->charge_type = $data[6];
@@ -56,18 +56,19 @@ class StationsController extends Controller {
             $technicals->sources = $data[10];
             $technicals->id_station = $station->id;
             $technicals->save();
-            //var_dump($data);die;
+            
         }echo 'finished';
         
         ini_set('auto_detect_line_endings',FALSE);
     } 
 
     public function nearestStations() {
-
+        // recupérer les position actuelle via ajax
         $locationLatitude = $_POST['lat'];
         $locationLongitude = $_POST['lon'];
       
-       $sql = "SELECT * , ( 3959 * ACOS( COS( RADIANS( :locationLatitude ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( :locationLongitude ) ) + SIN( RADIANS( :locationLatitude  ) ) * SIN( RADIANS( latitude )))) AS distance
+        // Requet pour calculer la distance entre la position actuelle et les stations dans un rayon  de 20 km
+        $sql = "SELECT * , ( 3959 * ACOS( COS( RADIANS( :locationLatitude ) ) * COS( RADIANS( latitude ) ) * COS( RADIANS( longitude ) - RADIANS( :locationLongitude ) ) + SIN( RADIANS( :locationLatitude  ) ) * SIN( RADIANS( latitude )))) AS distance
                 FROM stations
                 HAVING distance < 20
                 ORDER BY distance";
@@ -82,9 +83,7 @@ class StationsController extends Controller {
 
        $datas = $query->fetchAll();
 
-       //var_dump($data); die();
-      
-       echo json_encode($datas);
+       echo json_encode($datas); 
     }
 
     public function allStations() // afficher toutes les bornes sur la carte
@@ -98,7 +97,6 @@ class StationsController extends Controller {
                 $array[$key]->technicalArray[] = $allTechnical;
             }
         }
-        //echo '<pre>'; var_dump($allTechnical->company); die();
         
        echo $this->twig->render('stations/index.html.twig',[  
             'allStations' => $stationsArray 
@@ -114,7 +112,7 @@ class StationsController extends Controller {
             $queryBuilder = $stations->getQueryHelper();
             $queryBuilder->orWhere("zip", '=', '"'.$_GET['search'].'"'); // par codes postales
             $queryBuilder->orWhere("city", 'LIKE', '"%'.$_GET['search'].'%"'); // Ou par villes
-            $queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"');
+            //$queryBuilder->orWhere("address", 'LIKE', '"%'.$_GET['search'].'%"'); //  Ou par adresse
             $stations->setQueryHelper($queryBuilder);
             $array = [];
             foreach($stations as $key => $station) {
@@ -129,8 +127,6 @@ class StationsController extends Controller {
                 'stations' => $array
             ]);
         }
-       
-    //$this->url->redirect('adress');
     }
 
 
